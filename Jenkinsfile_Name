@@ -1,0 +1,75 @@
+
+pipeline{
+    agent any
+    environment{
+				VERSION = "test"
+    }
+    stages{
+		//Deployment on qa enviroment
+		stage('Deployment-on-QA'){
+				steps{
+					echo "***************QA deployed****************"
+					script{
+						post{
+							success{
+								mail to: 'shailesh_chavhan@persistent.com',
+										 subject: "Successful Build: ${currentBuild.fullDisplayName}",
+										 body:
+										 """QA deployment done 2nd 
+										 \n3rd
+										 \n4th"""
+			
+							}
+							failure{
+									step([
+										$class: 'Mailer', notifyEveryUnstableBuild: true,
+										recipients: "shailesh_chavhan@persistent.com",
+										sendToIndividuals: true
+									])
+							}
+					
+						}
+						def e2eDeployment = input(
+							id: 'userInput', message: 'Deployment On E2E', parameters: [
+							[$class: 'BooleanParameterDefinition', defaultValue: false, description: '', name: 'Do you want to proceed for E2E deployment?']
+						])
+					}
+				}
+				
+				
+				
+		}
+		//stage('UserInput'){
+		//	steps{
+		//		
+		//	}
+			
+		//}
+		
+		//deployment in next enviroment
+		stage('Deployment-on-E2E'){
+				steps{
+						echo "***************E2E deployed****************"
+				}
+				post{
+					success{
+						mail to: 'shailesh_chavhan@persistent.com',
+								 subject: "Successful Build: ${currentBuild.fullDisplayName}",
+								 body: 
+								 """E2E deployment done 2nd	\n3rd
+								 \n 4th"""
+			
+					}
+					failure{
+							step([
+								$class: 'Mailer', notifyEveryUnstableBuild: true,
+								recipients: "shailesh_chavhan@persistent.com",
+								sendToIndividuals: true
+							])
+					}
+					
+				}
+		}				
+	}
+}
+
