@@ -16,7 +16,7 @@ pipeline{
 			steps{
 				slackSend baseUrl: 'https://hooks.slack.com/services/',
 				channel: 'test', color: 'warning',
-				message: 'Need Manual User Input In : ${env.JOB_NAME}  ${env.BUILD_NUMBER}',
+				message: "Need Manual User Input In : ${env.JOB_NAME}  ${env.BUILD_NUMBER}",
 				teamDomain: 'Persistent-Team', tokenCredentialId: 'Slack-Cerdentials',
 				username: 'Shailesh'
 				input(
