@@ -23,7 +23,7 @@ pipeline{
 				
 				slackSend baseUrl: 'https://hooks.slack.com/services/',
 				channel: 'test', color: 'good',
-				message: "Tenant On-boarding Service waiting for Deployment on E2E environment \nBuild Details : ${currentBuild.fullDisplayName} \n<${env.BUILD_URL}input |Click Here> To Approve",
+				message: "Tenant On-boarding Service waiting for Deployment on E2E environment \nBuild Details : ${currentBuild.fullDisplayName} \n<${env.BUILD_URL}input |Click Here> To Continue",
 				teamDomain: 'Persistent-Team', tokenCredentialId: 'Slack-Cerdentials',
 				username: 'Shailesh'
 				input(
