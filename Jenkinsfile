@@ -19,7 +19,7 @@ pipeline{
 				channel: 'smtip-build-approvers', color: 'good',
 				message: "Need Manual User Input In : ${currentBuild.fullDisplayName} \\n<${env.BUILD_URL}input |Click Here> To Approve",
 				notifyCommitters: true, teamDomain: 'simpplr-persistent',
-				tokenCredentialId: 'smtip-Slack-Cerdentials' username: 'Shailesh'
+				tokenCredentialId: 'smtip-Slack-Cerdentials', username: 'Shailesh'
 				//slackSend baseUrl: 'https://hooks.slack.com/services/',
 				//channel: 'test', color: 'warning',
 				//message: "Need Manual User Input In : ${currentBuild.fullDisplayName} \n<${env.BUILD_URL}input |Click Here> To Approve",
