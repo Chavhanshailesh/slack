@@ -14,12 +14,18 @@ pipeline{
 		}
 		stage('User Input for E2E Deployment'){
 			steps{
+			
 				slackSend baseUrl: 'https://hooks.slack.com/services/',
-				channel: 'test', color: 'warning',
-				message: "Need Manual User Input In : ${currentBuild.fullDisplayName} \n<${env.BUILD_URL}input |Click Here> To Approve",
-				teamDomain: 'Persistent-Team', tokenCredentialId: 'Slack-Cerdentials',
-				username: 'Shailesh'
-				input(
+				channel: 'smtip-build-approvers', color: 'good',
+				message: "Need Manual User Input In : ${currentBuild.fullDisplayName} \\n<${env.BUILD_URL}input |Click Here> To Approve",
+				notifyCommitters: true, teamDomain: 'simpplr-persistent',
+				tokenCredentialId: 'smtip-Slack-Cerdentials'
+				//slackSend baseUrl: 'https://hooks.slack.com/services/',
+				//channel: 'test', color: 'warning',
+				//message: "Need Manual User Input In : ${currentBuild.fullDisplayName} \n<${env.BUILD_URL}input |Click Here> To Approve",
+				//teamDomain: 'Persistent-Team', tokenCredentialId: 'Slack-Cerdentials',
+				//username: 'Shailesh'
+				//input(
 					id: 'userInput', message: 'Deployment On E2E', parameters: [
 					[$class: 'BooleanParameterDefinition', defaultValue: false, description: '', name: 'Do you want to proceed for E2E deployment?']
 				])
