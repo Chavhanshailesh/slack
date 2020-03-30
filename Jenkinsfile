@@ -1,12 +1,14 @@
 pipeline{
 	agent any
 	environment{
+		AUTHOR = sh script: "git show -s --pretty=\"%an <%ae>\" ${GIT_COMMIT}", returnStdout: true
 		
 	}
 	stages{
 		stage('QA Build'){
 			steps{
 				echo 'inside qa'
+				echo "changes by ${AUTHOR}"
 			}
 			
 		}
@@ -21,6 +23,7 @@ pipeline{
 		stage('E2E Build'){
 			steps{
 				echo 'inside e2e'
+				echo "changes by ${AUTHOR}"
 			}
 			
 		}
